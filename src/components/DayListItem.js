@@ -3,9 +3,11 @@ import classnames from "classnames/bind";
 import "components/DayListItem.scss";
 
 export default function DayListItem(props) {
-  const dayListItemClass = classnames("dayListItem", {
-    dayListItem: props.name
-  });
+
+
+  // const dayListItemClass = classnames("dayListItem", {
+  //   dayListItem: props.name
+  // });
 
   let dayClass = classnames("day-list__item", {
     "day-list__item--selected": props.selected,
