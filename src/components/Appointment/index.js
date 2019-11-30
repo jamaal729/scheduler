@@ -15,6 +15,7 @@ import consolePrint from "util.js";
 const SHOW = "SHOW";
 const EMPTY = "EMPTY";
 const CREATE = "CREATE";
+const EDIT = "EDIT";
 const SAVING = "SAVING";
 const DELETING = "DELETING";
 const CONFIRM = "CONFIRM";
@@ -51,6 +52,9 @@ export default function Appointment(props) {
         <Show
           student={interview.student}
           interviewer={interview.interviewer}
+          onEdit={() => {
+            transition(EDIT);
+          }}
           onDelete={() => {
             transition(CONFIRM);
           }}
@@ -63,6 +67,15 @@ export default function Appointment(props) {
           interviewers={props.interviewers}
           onSave={(name, interviewer) => save(name, interviewer)}
           onCancel={() => back()}
+        />
+      )}
+      {mode === EDIT && (
+        <Form
+          name={props.interview.student}
+          interviewer={props.interview.interviewer}
+          interviewers={props.interviewers}
+          onCancel={() => back()}
+          onSave={save}
         />
       )}
       {mode === CONFIRM && (
