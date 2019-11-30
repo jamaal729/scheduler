@@ -36,6 +36,7 @@ export default function Application(props) {
         interview={interview}
         interviewers={interviewers}
         bookInterview={bookInterview}
+        cancelInterview={cancelInterview}
       />
     );
   });
@@ -77,6 +78,14 @@ export default function Application(props) {
         ...state,
         appointments
       });
+    });
+  }
+
+  function cancelInterview(id) {
+    console.log(id);
+
+    return axios.delete(`/api/appointments/${id}`).then(() => {
+      return;
     });
   }
 

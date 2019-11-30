@@ -8,6 +8,7 @@ import Header from "components/Appointment/Header";
 import Show from "components/Appointment/Show";
 import Empty from "components/Appointment/Empty";
 import Form from "components/Appointment/Form";
+import Confirm from "components/Appointment/Confirm";
 
 import consolePrint from "util.js";
 
@@ -15,6 +16,8 @@ const SHOW = "SHOW";
 const EMPTY = "EMPTY";
 const CREATE = "CREATE";
 const SAVING = "SAVING";
+const DELETING = "DELETING";
+const CONFIRM = "CONFIRM";
 
 export default function Appointment(props) {
   const interview = props.interview;
@@ -34,13 +37,24 @@ export default function Appointment(props) {
     props.bookInterview(props.id, interview).then(transition(SHOW));
   }
 
+  function remove() {
+    transition(DELETING);
+    props.cancelInterview(props.id).then(() => transition(EMPTY));
+  }
+
   console.log(props.interview);
   return (
     <article className="appointment">
       <Header time={props.time} />
       {mode === EMPTY && <Empty onAdd={() => transition(CREATE)} />}
       {mode === SHOW && interview && (
-        <Show student={interview.student} interviewer={interview.interviewer} />
+        <Show
+          student={interview.student}
+          interviewer={interview.interviewer}
+          onDelete={() => {
+            transition(CONFIRM);
+          }}
+        />
       )}
       {mode === CREATE && (
         <Form
@@ -49,6 +63,13 @@ export default function Appointment(props) {
           interviewers={props.interviewers}
           onSave={(name, interviewer) => save(name, interviewer)}
           onCancel={() => back()}
+        />
+      )}
+      {mode === CONFIRM && (
+        <Confirm
+          message={"Confirm delete?"}
+          onConfirm={() => remove()}
+          onCancel={back}
         />
       )}
     </article>
