@@ -38,10 +38,10 @@ export default function Appointment(props) {
       interviewer
     };
     console.log(name, interviewer);
-    transition(SAVING);
+    transition(SAVING, true);
     props
       .bookInterview(props.id, interview)
-      .then(transition(SHOW))
+      .then(() => transition(SHOW))
       .catch(err => transition(ERROR_SAVE, true));
   }
 
