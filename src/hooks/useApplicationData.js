@@ -94,7 +94,7 @@ function updateSpots(appointments, days, day) {
     (total, appointment) => {
       if (currentAppointments.includes(appointment.id)) {
         if (appointment.interview) {
-          return total++;
+          return ++total;
         }
       }
       return total;
