@@ -47,7 +47,7 @@ export default function useApplicationData() {
   }, []);
 
   function bookInterview(id, interview) {
-    console.log(id, interview);
+    // console.log(id, interview);
 
     const appointment = {
       ...state.appointments[id],
@@ -65,11 +65,41 @@ export default function useApplicationData() {
   }
 
   function cancelInterview(id) {
-    console.log(id);
+    // console.log(id);
+
+    const appointment = {
+      ...state.appointments[id],
+      interview: null
+    };
+
+    const appointments = {
+      ...state.appointments,
+      [id]: appointment
+    };
 
     return axios.delete(`/api/appointments/${id}`).then(() => {
-      return;
+      dispatch({ type: SET_INTERVIEW, value: appointments });
     });
   }
-  return { state, setDay, bookInterview, cancelInterview };
+
+  return { state, setDay, updateSpots, bookInterview, cancelInterview };
+}
+
+function updateSpots(appointments, days, day) {
+  const currentDay = days.find(target => target.name === day.name);
+  const currentAppointments = [...currentDay.appointments];
+
+  const allSpots = currentAppointments.length;
+  const usedSpots = Object.values({ ...appointments }).reduce(
+    (total, appointment) => {
+      if (currentAppointments.includes(appointment.id)) {
+        if (appointment.interview) {
+          return total++;
+        }
+      }
+      return total;
+    },
+    0
+  );
+  return allSpots - usedSpots;
 }

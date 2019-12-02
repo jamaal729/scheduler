@@ -12,8 +12,6 @@ import Confirm from "components/Appointment/Confirm";
 import Status from "components/Appointment/Status";
 import Error from "components/Appointment/Error";
 
-import consolePrint from "util.js";
-
 const SHOW = "SHOW";
 const EMPTY = "EMPTY";
 const CREATE = "CREATE";
@@ -26,8 +24,6 @@ const ERROR_DELETE = "ERROR_DELETE";
 
 export default function Appointment(props) {
   const interview = props.interview;
-  consolePrint({ interview });
-
   const { mode, transition, back } = useVisualMode(
     props.interview ? SHOW : EMPTY
   );
