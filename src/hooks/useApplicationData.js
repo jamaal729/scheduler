@@ -46,8 +46,9 @@ export default function useApplicationData() {
     });
   }, []);
 
+  
+
   function bookInterview(id, interview) {
-    // console.log(id, interview);
 
     const appointment = {
       ...state.appointments[id],
@@ -65,7 +66,6 @@ export default function useApplicationData() {
   }
 
   function cancelInterview(id) {
-    // console.log(id);
 
     const appointment = {
       ...state.appointments[id],
