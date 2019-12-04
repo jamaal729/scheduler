@@ -6,7 +6,8 @@ import {
   getByText,
   getByAltText,
   getAllByTestId,
-  getByPlaceholderText
+  getByPlaceholderText,
+  queryByText
 } from "@testing-library/react";
 
 import Application from "components/Application";
@@ -28,7 +29,7 @@ describe("Form", () => {
   });
 
   it("loads data, books an interview and reduces the spots remaining for Monday by 1", async () => {
-    const { container } = render(<Application />);
+    const { container, debug } = render(<Application />);
 
     await waitForElement(() => getByText(container, "Archie Cohen"));
 
@@ -43,7 +44,20 @@ describe("Form", () => {
     fireEvent.click(getByAltText(appointment, "Sylvia Palmer"));
 
     fireEvent.click(getByText(appointment, "Save"));
+    expect(getByText(appointment, "Saving")).toBeInTheDocument();
 
-    console.log(prettyDOM(appointment));
+    ///
+    await waitForElement(() => getByText(appointment, "Lydia Miller-Jones"));
+
+    const day = getAllByTestId(container, "day").find(day =>
+      queryByText(day, "Monday")
+    );
+
+    console.log(prettyDOM(day));
+
+    expect(getByText(day, "no spots remaining")).toBeInTheDocument();
+
+    // console.log(prettyDOM(appointment));
+    // debug(); // Renders the entire DOM
   });
 });
