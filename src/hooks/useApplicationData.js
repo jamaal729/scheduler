@@ -11,7 +11,6 @@ export default function useApplicationData() {
       case SET_DAY:
         return { ...state, day: action.value };
       case SET_APPLICATION_DATA:
-        console.log(action.value);
         return {
           ...state,
           days: action.value[0].data,

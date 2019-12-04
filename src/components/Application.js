@@ -27,6 +27,7 @@ export default function Application(props) {
   const schedule = appointments.map(appointment => {
     const interview = getInterview(state, appointment.interview);
     // console.log("interview: ", interview);
+    // console.log("{...appointment}:\n",  {...appointment});
     return (
       <Appointment
         {...appointment}
@@ -40,6 +41,7 @@ export default function Application(props) {
       />
     );
   });
+
 
   return (
     <main className="layout">
