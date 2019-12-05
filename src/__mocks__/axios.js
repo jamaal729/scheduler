@@ -87,7 +87,7 @@ export default {
   }),
 
   put: jest.fn(() => {
-    console.log("Mock: PUT");
+    // console.log("Mock: PUT");
     return Promise.resolve({
       status: 204,
       statusText: "No Content"
@@ -95,10 +95,11 @@ export default {
   }),
 
   delete: jest.fn(() => {
-    console.log("Mock: DELETE");
+    // console.log("Mock: DELETE");
     return Promise.resolve({
       status: 204,
       statusText: "No Content"
     });
   })
 };
+
