@@ -1,5 +1,4 @@
 import React from "react";
-
 import useVisualMode from "hooks/useVisualMode";
 
 import "components/Appointment/styles.scss";
@@ -76,15 +75,19 @@ export default function Appointment(props) {
           onCancel={() => back()}
         />
       )}
+
       {mode === EDIT && (
         <Form
           name={props.interview.student}
-          interviewer={props.interview.interviewer}
+          interviewer={props.interview.interviewer.id}
           interviewers={props.interviewers}
           onCancel={() => back()}
-          onSave={save}
+          onSave={(name, interviewer) => save(name, interviewer)}
+
+          // onSave={save}
         />
       )}
+
       {mode === CONFIRM && (
         <Confirm
           message={"Confirm delete?"}
@@ -94,6 +97,7 @@ export default function Appointment(props) {
       )}
 
       {mode === SAVING && <Status message="Saving" />}
+
       {mode === DELETING && <Status message="Deleting" />}
 
       {mode === ERROR_SAVE && (
