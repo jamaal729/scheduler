@@ -1,12 +1,10 @@
 import React from "react";
-import PropTypes from 'prop-types';
+import PropTypes from "prop-types";
 // import classnames from "classnames/bind";
 import InterviewerListItem from "components/InterviewerListItem";
 import "components/InterviewerList.scss";
 
 export default function InterviewerList(props) {
-
-  // const interviewers = [];
   const interviewers = props.interviewers.map(interviewer => {
     return (
       <InterviewerListItem

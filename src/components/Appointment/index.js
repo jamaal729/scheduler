@@ -32,7 +32,6 @@ export default function Appointment(props) {
       student: name,
       interviewer
     };
-    // console.log(name, interviewer);
     transition(SAVING, true);
     props
       .bookInterview(props.id, interview)
@@ -48,7 +47,6 @@ export default function Appointment(props) {
       .catch(err => transition(ERROR_DELETE, true));
   }
 
-  // console.log(props.interview);
   return (
     <article className="appointment" data-testid="appointment">
       <Header time={props.time} />
@@ -83,8 +81,6 @@ export default function Appointment(props) {
           interviewers={props.interviewers}
           onCancel={() => back()}
           onSave={(name, interviewer) => save(name, interviewer)}
-
-          // onSave={save}
         />
       )}
 

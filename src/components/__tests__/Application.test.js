@@ -37,7 +37,7 @@ describe("Form", () => {
     await waitForElement(() => getByText(container, "Archie Cohen"));
     const appointments = getAllByTestId(container, "appointment");
     const appointment = appointments[0];
-    console.log(prettyDOM(appointment));
+    // console.log(prettyDOM(appointment));
     fireEvent.click(getByAltText(appointment, "Add"));
     fireEvent.change(getByPlaceholderText(appointment, /enter student name/i), {
       target: { value: "Lydia Miller-Jones" }
@@ -61,7 +61,7 @@ describe("Form", () => {
       container,
       "appointment"
     ).find(appointment => queryByText(appointment, "Archie Cohen"));
-    console.log(prettyDOM(appointment));
+    // console.log(prettyDOM(appointment));
     fireEvent.click(queryByAltText(appointment, "Delete"));
     expect(getByText(appointment, "Confirm delete?")).toBeInTheDocument();
     fireEvent.click(queryByText(appointment, "Confirm"));
@@ -82,7 +82,7 @@ describe("Form", () => {
       container,
       "appointment"
     ).find(appointment => queryByText(appointment, "Archie Cohen"));
-    console.log(prettyDOM(appointment));
+    // console.log(prettyDOM(appointment));
     fireEvent.click(getByAltText(appointment, "Edit"));
     fireEvent.change(getByPlaceholderText(appointment, /enter student name/i), {
       target: { value: "Lydia Miller-Jones" }
@@ -132,13 +132,4 @@ describe("Form", () => {
       expect(getByText(appointment, "Error deleting appointment"))
     );
   });
-
-  /* test number five */
-  it("shows the save error when failing to save an appointment", () => {
-    axios.put.mockRejectedValueOnce();
-  });
 });
-
-// console.log(prettyDOM(day));
-// console.log(prettyDOM(appointment));
-// debug(); // Renders the entire DOM
